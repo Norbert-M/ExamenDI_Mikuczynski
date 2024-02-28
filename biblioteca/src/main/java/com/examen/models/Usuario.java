@@ -1,3 +1,6 @@
+/**
+ * La clase `Usuario` representa un usuario con atributos como DNI y métodos relacionados con sanción.
+ */
 package com.examen.models;
 
 import java.util.Date;

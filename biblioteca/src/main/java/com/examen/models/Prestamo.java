@@ -2,6 +2,10 @@ package com.examen.models;
 
 import java.util.Date;
 
+/**
+ * La clase `Prestamo` representa un préstamo con atributos como idLibro, dniUsuario y fechaDevolucion.
+*
+ */
 public class Prestamo {
     int idLibro;
     String dniUsuario;
@@ -37,6 +41,14 @@ public class Prestamo {
         this.fechaDevolucion = fechaDevolucion;
     }
 
+    /**
+     * El método `toString` en Java devuelve una representación en cadena de un objeto `Prestamo`
+     * incluyendo sus atributos `idLibro`, `dniUsuario` y `fechaDevolucion`.
+     * 
+     * @return El método `toString` devuelve una representación de cadena de un objeto "Prestamo",
+     * incluyendo la identificación del libro (`idLibro`), el número de identificación del usuario
+     * (`dniUsuario`) y la fecha de regreso (`fechaDevolucion`).
+     */
     @Override
     public String toString() {
         return "Prestamo [idLibro=" + idLibro + ", dniUsuario=" + dniUsuario + ", fechaDevolucion=" + fechaDevolucion
