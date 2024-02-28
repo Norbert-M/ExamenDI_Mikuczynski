@@ -1,5 +1,7 @@
 package com.examen;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import com.examen.models.Libro;
@@ -16,8 +18,23 @@ public class Biblioteca {
     private List<Usuario> usuarios;
 
 
+    
+
+
 
     /*GETTERS Y SETTERS */
+
+    public Biblioteca() {
+        this.libros = new ArrayList<>();
+        this.prestamos = new ArrayList<>();
+        this.usuarios = new ArrayList<>();
+    }
+
+    public Biblioteca(List<Libro> libros, List<Prestamo> prestamos, List<Usuario> usuarios) {
+        this.libros = libros;
+        this.prestamos = prestamos;
+        this.usuarios = usuarios;
+    }
 
     public List<Libro> getLibros() {
         return libros;
@@ -49,12 +66,26 @@ public class Biblioteca {
         prestamos.add(prestamo);
     }
 
+    void altaUsuario(String dniUsuario){
+        Usuario usuario = new Usuario(dniUsuario);
+        usuarios.add(usuario);
+    }
+
     /*MÉTODOS ALTA Y BAJA LIBRO */
 
     void altaLibro(int idLibro, String titulo, String isbn){
         Libro libro = new Libro(idLibro, titulo, isbn);
+
+        //recorrer la lista de libros en un for each
+        for (Libro libro2 : libros) {
+            if(libro2.getIdLibro() == idLibro || libro2.getIsbn().equals(isbn)){
+                throw new IllegalArgumentException("El libro ya existe");
+            }
+        }
         libros.add(libro);
     }
+
+    
 
     void bajaLibro(int idLibro){
         for (Libro libro : libros) {
@@ -70,17 +101,32 @@ public class Biblioteca {
     /*MÉTODOS PRESTAR Y DEVOLVER LIBRO */
 
     void Prestar(int Id_libro,String Dni_Usuario){
-
+        Libro libroEncontrado = null;
         for (Libro libro : libros) {
             if(libro.getIdLibro() == Id_libro){
-                for (Usuario usuario : usuarios) {
-                    if(usuario.getDniUsuario().equals(Dni_Usuario)){
-                        Prestamo prestamo = new Prestamo(Id_libro, Dni_Usuario, new java.util.Date());
-                        prestamos.add(prestamo);
-                    }
-                }
+                libroEncontrado = libro;
+                return;
             }
         }
+    
+        if (libroEncontrado == null) {
+            throw new IllegalArgumentException("Libro no encontrado");
+        }
+    
+        Usuario usuarioEncontrado = null;
+        for (Usuario usuario : usuarios) {
+            if(usuario.getDniUsuario().equals(Dni_Usuario)){
+                usuarioEncontrado = usuario;
+                return;
+            }
+        }
+    
+        if (usuarioEncontrado == null) {
+            throw new IllegalArgumentException("Usuario no encontrado");
+        }
+    
+        Prestamo prestamo = new Prestamo(Id_libro, Dni_Usuario, new java.util.Date());
+        prestamos.add(prestamo);
     }
 
     void devolverLibro(int idLibro, String dniUsuario){
@@ -105,6 +151,8 @@ public class Biblioteca {
             }
         }
     }
+
+
 
 
 

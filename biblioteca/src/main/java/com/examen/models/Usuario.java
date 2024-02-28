@@ -15,6 +15,14 @@ public class Usuario {
         this.fechaAltaSancion = fechaAltaSancion;
     }
 
+    
+
+    public Usuario(String dniUsuario) {
+        this.dniUsuario = dniUsuario;
+    }
+
+
+
     public String getDniUsuario() {
         return dniUsuario;
     }
