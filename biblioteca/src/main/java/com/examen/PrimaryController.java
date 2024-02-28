@@ -1,12 +1,20 @@
 package com.examen;
 
-import java.io.IOException;
+import com.examen.models.Libro;
+
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.control.ListView;
 
 public class PrimaryController {
 
     @FXML
-    private void switchToSecondary() throws IOException {
-        App.setRoot("secondary");
-    }
+    private Button anyadirLibroButton;
+
+    @FXML
+    private ListView<Libro> listViewLibros;
+
+    @FXML
+    private Button nuevoPrestamoButton;
+
 }
